@@ -15,7 +15,7 @@ This project assumes that you have already setup MySQL Server.
 
 Note: On Windows 10, MySQL 8.0.18 installer failed to install the server.  To resolve, deselect Copy Server Data Files option in the installer.
 
-If using Visual Studio Code, you will need to generate ASP.NET Core developer certificates by issues the following commands from a terminal:
+If using Visual Studio Code, you will need to generate ASP.NET Core developer certificates by issuing the following commands from a terminal:
 
     dotnet dev-certs https --clean
     dotnet dev-certs https
