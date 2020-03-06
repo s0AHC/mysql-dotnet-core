@@ -1,4 +1,4 @@
-# MySQL ASP.NET Core 2.1
+# MySQL ASP.NET Core 3.1
 
 Convert an ASP.NET Core Web Application project to use MySQL with Entity Framework.
 
@@ -6,7 +6,19 @@ This enables development of ASP.NET Core projects using [VS Code](https://code.v
 
 ![vscode](http://labs.jasonsturges.com/coreclr/mysql-dotnet-core.png)
 
-This project uses .NET Core 2.1 target framework, ASP.NET Core Web Application project scaffold from Visual Studio 2017 (version 15.7.3).
+This project uses .NET Core 3.1 target framework, ASP.NET Core Web Application project scaffold from Visual Studio 2019 (version 16.4.5).
+
+
+## Environment Setup
+
+This project assumes that you have already setup MySQL Server.
+
+Note: On Windows 10, MySQL 8.0.18 installer failed to install the server.  To resolve, deselect Copy Server Data Files option in the installer.
+
+If using Visual Studio Code, you will need to generate ASP.NET Core developer certificates by issues the following commands from a terminal:
+
+    dotnet dev-certs https --clean
+    dotnet dev-certs https
 
 
 ## Project Setup
@@ -22,11 +34,11 @@ Install the `MySql.Data.EntityFrameworkCore` NuGet package in the ASP.NET web ap
 
 To do this, you can use the `dotnet` command line by executing:
 
-    $ dotnet add package MySql.Data.EntityFrameworkCore --version 8.0.11
+    $ dotnet add package MySql.Data.EntityFrameworkCore --version 8.0.19
 
 Or, edit the project's .csproj file and add the following line in the `PackageReference` item group:
 
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.19" />
 
 
 ### Update appsettings.json
@@ -93,7 +105,7 @@ To resolve this, add the following code within the ApplicationDbContext.cs `OnMo
 
 Then, generate a new migration using Visual Studio Package Manager Console (from menu: Tools -> NuGet Package Manager -> Package Manager Console):
 
-    >> Add-Migration
+    PM> Add-Migration
 
 Or, from the command line via DotNet CLI:
 
@@ -121,7 +133,7 @@ Running the `dotnet ef` fails initially as the `__efmigrationshistory` table doe
 
 Execute the migration using either Visual Studio Package Manager Console (from menu: Tools -> NuGet Package Manager -> Package Manager Console):
 
-    >> Update-Database
+    PM> Update-Database
 
 Or, from the command line via DotNet CLI, execute the following command inside the project directory, **where the .csproj file is located**:
 
