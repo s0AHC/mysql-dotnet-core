@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MySqlDotnetCore.Models;
 
 namespace MySqlDotnetCore.Data
@@ -22,6 +23,17 @@ namespace MySqlDotnetCore.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+
+            foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                foreach (var property in entityType.GetProperties())
+                {
+                    if (property.ClrType == typeof(bool))
+                    {
+                        property.SetValueConverter(new BoolToIntConverter());
+                    }
+                }
+            }
 
             // Shorten key length for Identity
             builder.Entity<ApplicationUser>(entity => entity.Property(m => m.Id).HasMaxLength(127));
@@ -43,6 +55,20 @@ namespace MySqlDotnetCore.Data
                 entity.Property(m => m.Name).HasMaxLength(127);
 
             });
+        }
+
+        public class BoolToIntConverter : ValueConverter<bool, int>
+        {
+            public BoolToIntConverter(ConverterMappingHints mappingHints = null)
+                : base(
+                        v => Convert.ToInt32(v),
+                        v => Convert.ToBoolean(v),
+                        mappingHints)
+            {
+            }
+
+            public static ValueConverterInfo DefaultInfo { get; }
+                = new ValueConverterInfo(typeof(bool), typeof(int), i => new BoolToIntConverter(i.MappingHints));
         }
     }
 }

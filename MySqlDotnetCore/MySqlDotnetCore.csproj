@@ -8,6 +8,10 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
     <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Migrations\20200422030657_CreateDB.cs" />
+    <Compile Remove="Migrations\20200422030657_CreateDB.Designer.cs" />
+    <Compile Remove="Migrations\20200422032838_CreateDB.cs" />
+    <Compile Remove="Migrations\20200422032838_CreateDB.Designer.cs" />
   </ItemGroup>
 
 

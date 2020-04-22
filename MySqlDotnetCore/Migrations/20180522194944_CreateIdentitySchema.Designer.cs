@@ -148,9 +148,9 @@ namespace MySqlDotnetCore.Migrations
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed").HasConversion<int>();
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled").HasConversion<int>();
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
@@ -164,11 +164,11 @@ namespace MySqlDotnetCore.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed").HasConversion<int>();
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<bool>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled").HasConversion<int>();
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
