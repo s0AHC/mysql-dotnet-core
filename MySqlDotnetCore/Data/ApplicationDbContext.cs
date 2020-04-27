@@ -70,5 +70,19 @@ namespace MySqlDotnetCore.Data
             public static ValueConverterInfo DefaultInfo { get; }
                 = new ValueConverterInfo(typeof(bool), typeof(int), i => new BoolToIntConverter(i.MappingHints));
         }
+
+        public class BoolToByteConverter : ValueConverter<bool, Byte>
+        {
+            public BoolToByteConverter(ConverterMappingHints mappingHints = null)
+                : base(
+                        v => Convert.ToByte(v),
+                        v => Convert.ToBoolean(v),
+                        mappingHints)
+            {
+            }
+
+            public static ValueConverterInfo DefaultInfo { get; }
+                = new ValueConverterInfo(typeof(bool), typeof(Byte), i => new BoolToByteConverter(i.MappingHints));
+        }
     }
 }
